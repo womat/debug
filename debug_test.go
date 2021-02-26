@@ -10,10 +10,8 @@ import (
 func isEqual(a interface{}, b interface{}) bool {
 	expect, _ := json.Marshal(a)
 	got, _ := json.Marshal(b)
-	if string(expect) != string(got) {
-		return false
-	}
-	return true
+
+	return string(expect) == string(got)
 }
 
 type testString = struct {
@@ -33,7 +31,7 @@ func (ds *dataSourceWrite) Write(data []byte) (int, error) {
 	}
 
 	ds.testCase[ds.count].got = make([]byte, 255)
-	n := copy(ds.testCase[ds.count].got, data[:len(data)])
+	n := copy(ds.testCase[ds.count].got, data[:])
 	ds.testCase[ds.count].got = ds.testCase[ds.count].got[:n]
 	ds.count++
 	return n, nil
