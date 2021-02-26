@@ -31,7 +31,7 @@ func (ds *dataSourceWrite) Write(data []byte) (int, error) {
 	}
 
 	ds.testCase[ds.count].got = make([]byte, 255)
-	n := copy(ds.testCase[ds.count].got, data[:])
+	n := copy(ds.testCase[ds.count].got, data)
 	ds.testCase[ds.count].got = ds.testCase[ds.count].got[:n]
 	ds.count++
 	return n, nil
